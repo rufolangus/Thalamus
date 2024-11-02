@@ -165,6 +165,9 @@ def main():
     #depot_tools
     if not shutil.which('gclient'):
       destination = home_path / 'depot_tools'
+      if destination.exists() and any(destination.iterdir()):
+        shutil.rmtree(destination)
+    
       subprocess.check_call(['git', 'clone', 'https://chromium.googlesource.com/chromium/tools/depot_tools.git', destination])
 
     #nasm

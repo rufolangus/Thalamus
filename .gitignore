@@ -13,3 +13,6 @@ __pycache__
 thalamus/native
 *.dist-info
 .vs
+cmake-*.tar.gz
+nasm-*.zip
+pyenv/
