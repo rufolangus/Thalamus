@@ -45,7 +45,7 @@ auth_handler = urllib.request.HTTPBasicAuthHandler(password_mgr)
 opener = urllib.request.build_opener(auth_handler, log_handler)
 urllib.request.install_opener(opener)
 
-CMAKE_VERSION = '3.30.2'
+CMAKE_VERSION = '3.30.5'
 
 def download(url: str):
   print(f'Downloading {url}: 0%')
@@ -176,10 +176,10 @@ def main():
 
     #cmake
     if not shutil.which('cmake'):
-      subprocess.check_call(['curl', '-L', '-o', f'cmake-{CMAKE_VERSION}-macos-universal.tar.gz', 'https://github.com/Kitware/CMake/releases/download/v{CMAKE_VERSION}/cmake-{CMAKE_VERSION}-macos-universal.tar.gz'])
+      subprocess.check_call(['curl', '-L', '-o', f'cmake-{CMAKE_VERSION}-macos-universal.tar.gz', f'https://github.com/Kitware/CMake/releases/download/v{CMAKE_VERSION}/cmake-{CMAKE_VERSION}-macos-universal.tar.gz'])
       subprocess.check_call(['tar', '-xvzf', f'cmake-{CMAKE_VERSION}-macos-universal.tar.gz', '-C', os.environ['HOME']])
       with open(str(home_path / '.thalamusrc'), 'a') as bashrc:
-        bashrc.write(f'\nexport PATH={home_str}/cmake-{CMAKE_VERSION}-macos-universal/CMake.app/Contents/bin:$PATH\n')
+        bashrc.write(f'\nexport PATH=q{home_str}/cmake-{CMAKE_VERSION}-macos-universal/CMake.app/Contents/bin:$PATH\n')
 
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-U', 'setuptools'], cwd=home_str)
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', str(pathlib.Path.cwd()/'requirements.txt')], cwd=home_str)
