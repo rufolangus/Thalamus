@@ -13,6 +13,17 @@ elseif(MSVC_VERSION MATCHES "^193[0-9]$")
   set(OPENCV_LIBS_FOLDER vc17)
 endif()
 
+if(ANDROID)
+  # Use NDK's zlib
+  set(ZLIB_ROOT "${CMAKE_ANDROID_NDK}/sources/third_party/zlib")
+  set(ZLIB_INCLUDE_DIRS "${ZLIB_ROOT}")
+  set(ZLIB_LIBRARIES "${ZLIB_ROOT}/libs/${CMAKE_ANDROID_ARCH_ABI}/libz.a")
+
+  # Configure OpenCV to use the external zlib
+  set(BUILD_ZLIB OFF CACHE BOOL "Use external zlib")
+  set(ZLIB_USE_EXTERNAL ON CACHE BOOL "Use external zlib")
+endif()
+
 set(OPENCV_LIB_FILES)
 if(WIN32)
   set(OPENCV_LIBS "IlmImf$<$<CONFIG:Debug>:d>"

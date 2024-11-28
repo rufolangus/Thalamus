@@ -4,10 +4,10 @@
 #include <assert.h>
 #if defined(_WIN32) || defined(__APPLE__)
 #include <filesystem>
-namespace filesystem = std::filesystem;
+namespace fs = std::filesystem;
 #else
-#include <experimental/filesystem>
-namespace filesystem = std::experimental::filesystem;
+#include <filesystem>
+namespace fs = std::filesystem;
 #endif
 #include <condition_variable>
 #include <tracing/iclock.hpp>
@@ -147,7 +147,7 @@ namespace tracing
   static void serializeEvents()
   {
     auto thread_id = std::this_thread::get_id();
-    filesystem::create_directories(outputFolderName);
+    fs::create_directories(outputFolderName);
     std::vector<TraceEvent> localTraceEvents;
     localTraceEvents.reserve(1048576);
 

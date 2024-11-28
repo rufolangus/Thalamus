@@ -4,6 +4,7 @@
 #include <iostream>
 #include <functional>
 #include <thalamus_config.h>
+#include "thalamus.h" // Include necessary headers
 
 const auto HELP = 
 "Thalamus native program, version " GIT_COMMIT_HASH "\n"
@@ -44,4 +45,10 @@ int main(int argc, char * argv[]) {
   }
 
   return command->second(arguments.size(), arguments.data());
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_example_thalamus_Thalamus_run(JNIEnv* env, jobject /* this */) {
+    // Call the main function or equivalent entry point
+    main();
 }
